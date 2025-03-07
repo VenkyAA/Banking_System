@@ -35,7 +35,21 @@ public class JwtUtil {
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 	
-}
-
+	public String extractRole(String token) {
+        return extractClaim(token, claims -> claims.get("role", String.class));
+	}
 	
-
+	private <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
+		final Claims claims = extractAllClaims(token);
+		return claimResolver.apply(claims);
+	}
+	
+	private Claims extractAllClaims(String token) {
+		return Jwts.parser()
+	            .verifyWith(getKey())
+	            .build()
+	            .parseSignedClaims(token)
+	            .getPayload();
+	}
+	
+}

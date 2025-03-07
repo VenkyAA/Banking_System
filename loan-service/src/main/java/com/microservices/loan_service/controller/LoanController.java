@@ -2,9 +2,6 @@ package com.microservices.loan_service.controller;
 
 import com.microservices.loan_service.dto.LoanDTO;
 import com.microservices.loan_service.service.LoanService;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +11,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/loans")
+//@CrossOrigin(origins = "http://localhost:3001")
 public class LoanController {
 
     @Autowired
     private LoanService loanService;
 
     @PostMapping
-    public ResponseEntity<LoanDTO> createLoan(@Valid @RequestBody LoanDTO loanDTO) {
+    public ResponseEntity<LoanDTO> createLoan(@RequestBody LoanDTO loanDTO) {
         try {
             return new ResponseEntity<>(loanService.createLoan(loanDTO), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -34,9 +32,8 @@ public class LoanController {
         return ResponseEntity.ok(loans);
     }
 
-    @PutMapping("/repay/{id}")
-    public ResponseEntity<LoanDTO> repayLoan(@PathVariable long id, @Valid @RequestBody LoanDTO loanDTO) {
-        loanDTO.setId(id);
+    @PutMapping("/repay/{loanId}")
+    public ResponseEntity<LoanDTO> repayLoan(@PathVariable long loanId, @RequestBody LoanDTO loanDTO) {
         return new ResponseEntity<>(loanService.repayLoan(loanDTO), HttpStatus.OK);
     }
 
@@ -46,6 +43,12 @@ public class LoanController {
         LoanDTO loanDTO = loanService.getLoanByLoanId(loanId);
         return ResponseEntity.ok(loanDTO);
     }
+    
+    @GetMapping
+    public ResponseEntity<List<LoanDTO>> getAllLoans() {
+        List<LoanDTO> loans = loanService.getAllLoans();
+        return ResponseEntity.ok(loans);
+    }
 
     // New endpoint to delete a loan by loanId
     @DeleteMapping("/{loanId}")
@@ -53,4 +56,12 @@ public class LoanController {
         loanService.deleteLoan(loanId);
         return ResponseEntity.noContent().build();
     }
+    
+    @DeleteMapping("/account/{id}")
+    public ResponseEntity<Void> deleteLoansByAccountId(@PathVariable long id) {
+        loanService.deleteLoansByAccountId(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
+

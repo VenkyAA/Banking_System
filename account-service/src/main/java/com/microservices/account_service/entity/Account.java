@@ -21,4 +21,10 @@ public class Account {
     private String accountHolder;
 
     private double balance;
+
+    @Column(name = "role")
+    private String role; // Add role attribute
+    
+    @Column(name = "username")
+    private String username;
 }

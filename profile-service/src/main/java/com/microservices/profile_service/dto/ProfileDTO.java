@@ -10,9 +10,6 @@ import jakarta.validation.constraints.Size;
 public class ProfileDTO {
     private long id;
 
-    @NotEmpty(message = "Account holder cannot be empty")
-    private String accountHolder;
-
     @NotEmpty(message = "Government ID cannot be empty")
     private String govtId;
 
@@ -30,9 +27,8 @@ public class ProfileDTO {
     @Email(message = "Email ID should be valid")
     private String emailId;
 
-    public ProfileDTO(long id, String accountHolder, String govtId, String employment, String address, String phoneNumber, String emailId) {
+    public ProfileDTO(long id, String govtId, String employment, String address, String phoneNumber, String emailId) {
         this.id = id;
-        this.accountHolder = accountHolder;
         this.govtId = govtId;
         this.employment = employment;
         this.address = address;

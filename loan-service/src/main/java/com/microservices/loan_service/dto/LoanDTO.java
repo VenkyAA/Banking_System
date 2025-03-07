@@ -16,7 +16,7 @@ public class LoanDTO {
     @Min(value = 1, message = "Number of years must be at least 1")
     private int numberOfYears;
 
-    @Positive(message = "Interest rate must be positive")
+    @PositiveOrZero(message = "Interest rate cannot be negative")
     private double interestRate;
 
     @PositiveOrZero(message = "Amount to be repaid cannot be negative")
@@ -25,7 +25,11 @@ public class LoanDTO {
     @PositiveOrZero(message = "Amount paid cannot be negative")
     private double amountPaid;
 
-    @NotEmpty(message = "Loan type cannot be empty")
+    @NotEmpty(message = "Loan type cannot be empgty")
     private String loanType;
+    
+    @Min(value = 300, message = "CIBIL score must be at least 300")
+    @Max(value = 900, message = "CIBIL score must be at most 900")
+    private int cibilScore; // New attribute for CIBIL score
 }
 

@@ -13,6 +13,7 @@ public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
+    // Log method entry and exit points around the service layer methods
     @Around("execution(* com.microservices.account_service.service..*(..))")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info("Entering method: {}", joinPoint.getSignature().getName());
@@ -21,4 +22,3 @@ public class LoggingAspect {
         return result;
     }
 }
-

@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 @Entity
 public class User {
 
-    
-	@Id
+    @Id
     private String username;
     private String password;
     private long id;
-
     private LocalDateTime loginTime;
+    private String role;
 }
+

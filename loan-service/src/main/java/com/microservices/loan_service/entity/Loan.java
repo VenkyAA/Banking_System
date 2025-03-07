@@ -17,14 +17,14 @@ import lombok.Setter;
 public class Loan {
 
     @Id
-    private long loanId;  // New attribute for loanId
+    private long loanId;  // Unique identifier for the loan
 
-    private long id;
+    private long id;  // Account ID
     private double principalAmount;
     private int numberOfYears;
     private double interestRate;
     private double amountToBeRepaid;
     private double amountPaid;
     private String loanType;
+    private int cibilScore; // New attribute for CIBIL score
 }
-

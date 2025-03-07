@@ -1,6 +1,8 @@
 package com.microservices.transaction_service.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -27,4 +29,5 @@ public class Transaction {
     private Date date;
     private Long targetAccountId;
 }
+
 

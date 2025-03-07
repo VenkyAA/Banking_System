@@ -13,13 +13,17 @@ public class AccountDTO {
     @NotEmpty(message = "Account holder name must not be empty")
     private String accountHolder;
 
-    @NotNull(message = "Balance must not be null")
-    @Min(value = 0, message = "Balance must be non-negative")
+    @NotNull
+    @Min(value = 0, message = "Balance must be positive")
     private double balance;
 
-    public AccountDTO(long id, String accountHolder, double balance) {
+    private String role; // Add role attribute
+
+    public AccountDTO(long id, String accountHolder, double balance, String role) {
         this.id = id;
         this.accountHolder = accountHolder;
         this.balance = balance;
+        this.role = role;
     }
 }
+

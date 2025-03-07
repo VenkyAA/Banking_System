@@ -14,19 +14,30 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
+//@CrossOrigin(origins = "http://localhost:3001")
 public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
 
     @PostMapping
-    public ResponseEntity<TransactionDTO> createTransaction(@RequestBody @Valid TransactionDTO transactionDTO) {
+    public ResponseEntity<TransactionDTO> createTransaction(@RequestBody TransactionDTO transactionDTO) {
         return new ResponseEntity<>(transactionService.createTransaction(transactionDTO), HttpStatus.CREATED);
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity<TransactionDTO> createTransferTransaction(@RequestBody @Valid TransactionDTO transactionDTO) {
+    public ResponseEntity<TransactionDTO> createTransferTransaction(@RequestBody TransactionDTO transactionDTO) {
         return new ResponseEntity<>(transactionService.createTransferTransaction(transactionDTO), HttpStatus.CREATED);
+    }
+    
+    @PostMapping("/withdraw")
+    public ResponseEntity<TransactionDTO> withdraw(@RequestBody TransactionDTO transactionDTO) {
+        return new ResponseEntity<>(transactionService.withdraw(transactionDTO), HttpStatus.CREATED);
+    }
+    
+    @PostMapping("/deposit")
+    public ResponseEntity<TransactionDTO> deposit(@RequestBody TransactionDTO transactionDTO) {
+        return new ResponseEntity<>(transactionService.deposit(transactionDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/account/{id}")
@@ -40,8 +51,6 @@ public class TransactionController {
         TransactionDTO transactionDTO = transactionService.getTransactionByTransactionId(transactionId);
         return ResponseEntity.ok(transactionDTO);
     }
-    
-
 
     @GetMapping("/account/{id}/balance")
     public ResponseEntity<Double> getAccountBalance(@PathVariable long id) {
@@ -54,5 +63,16 @@ public class TransactionController {
         transactionService.deleteTransaction(transactionId);
         return ResponseEntity.ok().build();
     }
-}
+    
+    @DeleteMapping("/account/{id}")
+    public ResponseEntity<Void> deleteTransactionsByAccountId(@PathVariable long id) {
+        transactionService.deleteTransactionsByAccountId(id);
+        return ResponseEntity.ok().build();
+    }
 
+    
+    @GetMapping
+    public ResponseEntity<List<TransactionDTO>> getAllTransactions() {
+        return ResponseEntity.ok(transactionService.getAllTransactions());
+    }
+}

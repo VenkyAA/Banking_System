@@ -14,6 +14,7 @@ public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
+    // Log method entry and exit points around the service layer methods
     @Around("execution(* com.microservices.loan_service.service.impl.LoanServiceImpl.*(..))")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info("Entering method: " + joinPoint.getSignature().getName() + " with arguments: " + Arrays.toString(joinPoint.getArgs()));

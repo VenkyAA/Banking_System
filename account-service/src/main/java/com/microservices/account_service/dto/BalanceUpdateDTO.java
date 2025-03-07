@@ -10,8 +10,10 @@ public class BalanceUpdateDTO {
     @Min(value = 0, message = "Amount must be non-negative")
     private double amount;
 
+    // Default constructor
     public BalanceUpdateDTO() {}
 
+    // Constructor with amount parameter
     public BalanceUpdateDTO(double amount) {
         this.amount = amount;
     }

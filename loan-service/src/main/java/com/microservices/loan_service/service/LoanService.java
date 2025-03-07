@@ -13,5 +13,11 @@ public interface LoanService {
     LoanDTO getLoanByLoanId(long loanId);
     
     void deleteLoan(long loanId);
+    
+    void deleteLoansByAccountId(long id);
+
+	List<LoanDTO> getAllLoans();
+
+	
 }
 

@@ -17,9 +17,6 @@ public class Profile {
     @Id
     private long id;
 
-    @Column(name = "account_holder_name")
-    private String accountHolder;
-
     @Column(name = "govt_id")
     private String govtId;
 

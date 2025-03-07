@@ -1,6 +1,7 @@
 package com.microservices.transaction_service.dto;
 
 import lombok.Data;
+import java.util.Date;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
@@ -18,6 +19,8 @@ public class TransactionDTO {
     private double amount;
 
     private Long targetAccountId;
+    
+    private Date date;
 }
 
 
